@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\UniqueTests;
 use App\Models\UniqueTestsResults;
+use App\Models\Answers;
 use Illuminate\Support\Str;
 
 class UniqueTestsController extends Controller
@@ -43,22 +44,31 @@ class UniqueTestsController extends Controller
         $utest = UniqueTests::find($request->hash);
         if($utest->is_completed)
         {
-            return array('is_completed'=>$is_completed,'results'=>$utest->results);
+            return array('is_completed'=>$is_completed, 'score' => $utest->score,'results'=>$utest->results);
         }
         else{
+            /*$uscore = 0;
+            foreach($request->data->questions as $item)
+            {
+                foreach($ite->answers as $item_answer) 
+                {
+                    if($item_answer->isSelector){
+                        if($item_answer->isSelector == Answers::find($item->id)->is_correct) $uscore++;
+                    }
+                }
+            }*/
+
+
             $utest_result = UniqueTestsResult::create([
-                'owner_id' => $request->owner_id, //Auth
-                'test_id' => $utest->id,
-                //'questions_id' => $request->questions_id,
-                //'answers' => $request->answers,
-                'is_completed'=>false,
+                'unique_test_id' => $utest->id,
+                'score' => $uscore,
+                'data' => $request->data,
             ]);
+
+
             $utest->update(['is_completed'=>true])->save();
             $utest->results;
             return $utest;
         }
     }
-
-
-    
 }

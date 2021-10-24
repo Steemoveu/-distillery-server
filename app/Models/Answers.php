@@ -23,7 +23,7 @@ class Answers extends Model
         'id',
         'text',
         'is_correct',
-        'questions_id',
+        'question_id',
     ];
 
     /**
@@ -32,7 +32,7 @@ class Answers extends Model
      * @var array
      */
     protected $hidden = [
-        'is_correct',
+        //'is_correct',
     ];
 
     /**

@@ -23,6 +23,7 @@ class TestsController extends Controller
     public function show($id)
     {
         $tests = Tests::find($id);
+
         foreach($tests->questions as $item_questions){
             
             foreach($item_questions->answers as $item_answers)
@@ -39,14 +40,12 @@ class TestsController extends Controller
         $tests = Tests::create([
             'text' => $request->text,
             'vacancy_id'=> $request->vacancy_id,
+            'info'=>$request->info,
         ]);
-
-
-
 
         foreach($request->questions as $item_questions)
         {
-            $questions_id = Questions::create([
+            $question_id = Questions::create([
                 'text' => $item_questions['text'],
                 'type'=> $item_questions['type'],
                 'test_id' => $tests->id
@@ -59,11 +58,11 @@ class TestsController extends Controller
                     Answers::create([
                     'text'=>$item_asr['text'],
                     'is_correct'=>$item_asr['is_correct'],
-                    'questions_id'=>$questions_id]);
+                    'question_id'=>$question_id]);
                 }
             }
         }
-        
+        $tests->questions;
         return $tests;
     }
 }

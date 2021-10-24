@@ -20,6 +20,7 @@ class Tests extends Model
     protected $fillable = [
         'id',
         'text',
+        'info',
         'vacancy_id'
     ];
 
@@ -37,9 +38,9 @@ class Tests extends Model
      * @var array
      */
     protected $casts = [
-
+        'info' => 'array'
     ];
-
+    
     public function questions()
     {
         return $this->hasMany(\App\Models\Questions::class, 'test_id', 'id');

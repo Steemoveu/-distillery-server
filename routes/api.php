@@ -14,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 
 //VacanciesController
 Route::post('/vacancies/create', 'App\Http\Controllers\VacanciesController@create');
@@ -36,7 +32,15 @@ Route::get('/question', 'App\Http\Controllers\QuestionsController@index');
 
 //QuestionsController
 Route::post('/unique_test/create', 'App\Http\Controllers\UniqueTestsController@create');
+Route::put('/unique_test/{id}', 'App\Http\Controllers\UniqueTestsController@update');
 Route::get('/unique_test/{id}', 'App\Http\Controllers\UniqueTestsController@show');
+
+
+//ResultController
+Route::post('/results/create', 'App\Http\Controllers\ResultController@create');
+Route::put('/results/{id}', 'App\Http\Controllers\ResultController@update');
+Route::get('/results/{id}', 'App\Http\Controllers\ResultController@show');
+Route::get('/results', 'App\Http\Controllers\ResultController@index');
 
 
 
@@ -45,9 +49,13 @@ Route::get('/unique_test/{id}', 'App\Http\Controllers\UniqueTestsController@show
 Route::get('/verification_testing/{name}', 'App\Http\Controllers\QuestionsController@index');
 
 
+Route::post('login', 'App\Http\Controllers\AuthController@login');
+
+
 Route::get('test', function(){
     return array(
         array('text' => 'Ответ', 'is_correct' => true),
-        array('text' => 'Ответ', 'is_correct' => true)
+        array('text' => 'Ответ', 'is_correct' => true),
+        array('login'=> 'admin', 'password'=>password_hash('password',PASSWORD_DEFAULT))
     );
 });

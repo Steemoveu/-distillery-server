@@ -16,6 +16,7 @@ class CreateTestsTables extends Migration
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
             $table->char('text', 255);
+            $table->json('info');
             $table->integer('vacancy_id');
             $table->timestamps();
         });

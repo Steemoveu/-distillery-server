@@ -6,11 +6,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UniqueTestsResults extends Model
+class Results extends Model
 {
     use HasFactory;
 
-    protected $table = 'unique_tests_results';
+    protected $table = 'results';
 
     /**
      * The attributes that are mass assignable.
@@ -19,9 +19,8 @@ class UniqueTestsResults extends Model
      */
     protected $fillable = [
         'id',
-        'unique_test_id',
-        'score',
-        'data',
+        'test_id',
+        'info',
     ];
 
     /**
@@ -38,11 +37,11 @@ class UniqueTestsResults extends Model
      * @var array
      */
     protected $casts = [
-        'data' => 'array'
+        'info' => 'array'
     ];
 
     public function test()
     {
-        return $this->hasMany(\App\Models\Tests::class, 'unique_test_id', 'id');
+        return $this->hasMany(\App\Models\Tests::class, 'test_id', 'id');
     }
 }

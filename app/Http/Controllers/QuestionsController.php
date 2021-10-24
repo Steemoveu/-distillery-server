@@ -33,7 +33,7 @@ class QuestionsController extends Controller
         ///is_correct
         
 
-        //$questions_id = Questions::create(['text'->$request->question->text])->id;
+        //$question_id = Questions::create(['text'->$request->question->text])->id;
 
         $questions = Questions::create([
             'text' => $request->question,
@@ -47,7 +47,7 @@ class QuestionsController extends Controller
             Answers::create([
                 'text'=>$item_asr->text,
                 'is_correct'=>$item_asr->is_correct,
-                'questions_id'=>$questions->id]
+                'question_id'=>$questions->id]
             );
         }
 
